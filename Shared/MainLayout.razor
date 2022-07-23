@@ -1,0 +1,112 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="@_themeEdits" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+<MudLayout>
+
+
+	@* Header *@
+	<MudAppBar Elevation="0" Class="p-0" DisableGutters
+			   Style="background-color: rgba(0, 150, 201, 0.5); padding-left:0px !important; padding-right:20px;">
+
+		<MudPaper Elevation="0" Style=" height:100%;">
+
+			<MudContainer Style="width:240px; height:100%; background-color:#2EA3C8; padding:0px;"
+						  Class="d-flex align-content-center justify-center flex-wrap">
+
+				@* Logo *@
+				<MudImage Src="images/InsaConnect, White Slim.png" Alt="InsaConnect" Elevation="0" Style="height:40px; width:100px;"></MudImage>
+
+			</MudContainer>
+
+		</MudPaper>
+
+		<MudSpacer />
+		@* Context menu button *@
+		<MudIconButton OnClick="@(() => SecondDrawerToggle())" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+	</MudAppBar>
+
+	@* Left Sidepanel *@
+	<MudDrawer @bind-Open="_drawerOpen"
+			   Style="background-color: rgba(188, 197, 204, 0.5);"
+			   ClipMode="DrawerClipMode.Always" Elevation="0" Variant="@DrawerVariant.Mini">
+
+		<NavMenu toogleSideMenu="_drawerOpen" toogleSideMenuChanged="DrawerToggle"> </NavMenu>
+
+	</MudDrawer>
+
+	@* Right Sidepanel *@
+	<MudDrawer @bind-Open="_secondDrawerOpen" 
+				Style="background-color: rgba(188, 197, 204, 0.5);"
+				ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Elevation="0" Variant="@DrawerVariant.Persistent">
+	</MudDrawer>
+
+	<MudMainContent>
+		@Body
+	</MudMainContent>
+
+</MudLayout>
+
+@*
+	FarveGuide
+
+	Lys Grå: HEX: #BCC5CC
+	RGBA: rgba(188, 197, 204, 0.5);
+	Mørk Grå: #2B3B43
+
+	Insatech Blue: #2EA3C8
+
+	Insatech Purple: #6773AD
+	Insatech Petrol: #0099A5
+	Insatech Green: #67B597
+	Insatech Sand: #949E95
+
+*@
+
+
+
+@code {
+
+	@*Open and close navigation menu*@
+	bool _drawerOpen = true;
+	void DrawerToggle()
+	{
+		_drawerOpen = !_drawerOpen;
+	}
+
+	@*Open and close context menu*@
+	bool _secondDrawerOpen = false;
+	void SecondDrawerToggle()
+	{
+		_secondDrawerOpen = !_secondDrawerOpen;
+	}
+
+
+	MudTheme _themeEdits = new MudTheme()
+		{
+			Palette = new Palette()
+			{
+				Primary = new MudBlazor.Utilities.MudColor("#2B3B43"),
+				Secondary = Colors.Grey.Darken3,
+
+				DrawerIcon = Colors.Grey.Lighten5,
+				DrawerText = Colors.Grey.Lighten5,
+			}
+							,
+			Typography = new Typography()
+			{
+				H6 = new H6()
+				{
+					FontFamily = new[] { "Frutiger", "Helvetica", "Arial", "sans-serif" },
+					FontSize = "1rem",
+					FontWeight = 1000,
+					LineHeight = 1.6,
+					LetterSpacing = ".0075em"
+				}
+			}
+		};
+
+}

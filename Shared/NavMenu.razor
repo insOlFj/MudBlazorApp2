@@ -1,0 +1,87 @@
+﻿@*Left Sidebar*@
+
+<MudNavMenu Bordered="true">
+	@* Menu Button *@
+	<MudNavLink OnClick="@(() => DrawerToggle(toogleSideMenu))"
+				Style="background-color: white;
+							   color: #2B3B43;
+					           height: 62px;
+					           align-items: center;"
+				Icon="@Icons.Material.Filled.Menu"
+				IconColor="Color.Secondary">Menu</MudNavLink>
+	@* Home Button *@
+	<MudNavLink Href="" Match="NavLinkMatch.All"
+				Style="background-color: #6773AD;
+							   height: 62px;
+					           align-items: center;"
+				Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+	@* My Devices Button *@
+	<MudNavLink Href="counter" Match="NavLinkMatch.Prefix"
+				Style="background-color: #0099A5;
+					           height: 62px;
+					           align-items: center;"
+				Icon="@Icons.Material.Filled.AvTimer">My Devices</MudNavLink>
+	@* My Views Button *@
+	<MudNavLink Href="fetchdata" Match="NavLinkMatch.Prefix"
+				Style="background-color: #67B597;
+					           height: 62px;
+					           align-items: center;"
+				Icon="@Icons.Material.Filled.RemoveRedEye">My views</MudNavLink>
+
+
+</MudNavMenu>
+
+<MudPaper Width="240px" Style="align-items: center;" Elevation="0">
+	<MudNavMenu>
+		<MudNavGroup Title=@myView
+					 Style="background-color: #949E95;
+					           height: 62px;
+							   padding-top:10px;
+							   color: white;"
+					 Icon="@Icons.Material.Filled.List"
+					 @bind-Expanded=_isExpanded>
+			<MudNavLink Href="/users"
+						Style="background-color: white;
+					           height: 62px;
+							   align-items: center;
+							   margin-top:10px;
+							   color: black"
+							  >Insatech Map</MudNavLink>
+			<MudNavLink Href="/security"
+						Style="background-color: white;
+					           height: 62px;
+							   align-items: center;
+							   color: black"
+					          >Insatech Calculatede</MudNavLink>
+		</MudNavGroup>
+	</MudNavMenu>
+</MudPaper>
+
+
+
+@code {
+	[Parameter] public bool toogleSideMenu { get; set; }
+	[Parameter] public EventCallback<bool> toogleSideMenuChanged { get; set; }
+
+	string myView = "Saved View";
+
+	bool _isExpanded = true;
+
+	void DrawerToggle(bool stateOfDrawer)
+	{
+		toogleSideMenuChanged.InvokeAsync(toogleSideMenu);
+
+		_isExpanded = !stateOfDrawer;
+
+		if (stateOfDrawer == false)
+		{
+			myView = "Saved View";
+		} else
+		{
+			myView = "";
+		}
+
+	}
+
+}
+

@@ -1,0 +1,84 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<MudContainer Class="mt-0">
+	<MudGrid Class="mt-0">
+
+		@* My devices *@
+		<MudItem xs="12" sm="5" md="5">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">My Devices</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+
+				@* Skal fyldes med indhold fra DB *@
+				<MudExpansionPanels Elevation="0" Class="rounded-0">
+					<MudExpansionPanel Text="Panel One" Style="border-bottom:solid;">
+						Panel One Content
+					</MudExpansionPanel>
+					<MudExpansionPanel Text="Panel Two" Style="border-bottom:solid;">
+						Panel Two Content
+					</MudExpansionPanel>
+					<MudExpansionPanel Text="Panel Three" Style="border-bottom:solid;">
+						Panel Three Content
+					</MudExpansionPanel>
+					<MudExpansionPanel Text="Panel Four" >
+						Panel Four Content
+					</MudExpansionPanel>
+				</MudExpansionPanels>
+
+
+			</MudCard>
+		</MudItem>
+
+		@* Shared with me *@
+		<MudItem xs="12" sm="5" md="5">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; height: 500px;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">Shared with me</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+			</MudCard>
+		</MudItem>
+
+		@* Shared with me *@
+		<MudItem xs="12" sm="5" md="2">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; height: 500px;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">Contacts</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+			</MudCard>
+		</MudItem>
+
+	</MudGrid>
+</MudContainer>
+
+@code {
+	private int currentCount = 0;
+
+	private void IncrementCount()
+	{
+		currentCount++;
+	}
+}
