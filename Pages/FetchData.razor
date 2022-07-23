@@ -3,40 +3,111 @@
 @inject WeatherForecastService ForecastService
 
 <PageTitle>Weather forecast</PageTitle>
+<MudContainer Class="mt-0">
+	<MudGrid Class="mt-0">
 
-<MudText Typo="Typo.h3" GutterBottom="true">Weather forecast</MudText>
-<MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
-@if (forecasts == null)
-{
-    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+		@* Graph *@
+		<MudItem xs="12" sm="6" md="6">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">Graph</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+				<MudContainer Style=" padding:12px;">
+					<MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px"></MudChart>
+					<MudButton @onclick="RandomizeData">Randomize Data</MudButton>
+					<MudText Typo="Typo.h6">Selected portion of the chart: @Index</MudText>
+				</MudContainer>
+
+			</MudCard>
+		</MudItem>
+
+		@* Donut *@
+		<MudItem xs="12" sm="6" md="6">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; ">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">Donut</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+				<MudContainer Class="d-flex align-content-center justify-center flex-wrap">
+
+					<MudChart ChartType="ChartType.Donut" InputData="@data" Width="100%" Height="300px" InputLabels="@labels" Class="d-flex justify-center">
+						<CustomGraphics>
+							<text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+							<text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@data.Sum().ToString()</text>
+						</CustomGraphics>
+					</MudChart>
+
+				</MudContainer>
+
+
+			</MudCard>
+		</MudItem>
+
+
+	</MudGrid>
+</MudContainer>
+
+
+
+@*er det bedre at det her er i sin egen .cs fil?*@
+@code {
+	private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+	public List<ChartSeries> Series = new List<ChartSeries>()
+	{
+		new ChartSeries() { Name = "Series 1", Data = new double[] { 90, 79, 72, 69, 62, 62, 55, 65, 70 } },
+		new ChartSeries() { Name = "Series 2", Data = new double[] { 10, 41, 35, 51, 49, 62, 69, 91, 148 } },
+		new ChartSeries() { Name = "Series 3", Data = new double[] { 53, 22, 35, 13, 17, 33, 43, 54, 65 } },
+		new ChartSeries() { Name = "Series 4", Data = new double[] { 30, 43, 54, 75, 81, 100, 121, 134, 139 } },
+	};
+	public string[] XAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
+
+	Random random = new Random();
+	public void RandomizeData()
+	{
+		var new_series = new List<ChartSeries>()
+		{
+			new ChartSeries() { Name = "Series 1", Data = new double[9] },
+			new ChartSeries() { Name = "Series 2", Data = new double[9] },
+			new ChartSeries() { Name = "Series 3", Data = new double[9] },
+			new ChartSeries() { Name = "Series 4", Data = new double[9] },
+		};
+		for (int i = 0; i < 9; i++)
+		{
+			new_series[0].Data[i] = random.NextDouble() * 100;
+			new_series[1].Data[i] = random.NextDouble() * 100;
+			new_series[2].Data[i] = random.NextDouble() * 100;
+			new_series[3].Data[i] = random.NextDouble() * 100;
+		}
+		Series = new_series;
+		StateHasChanged();
+	}
 }
-else
-{
-    <MudTable Items="forecasts" Hover="true" SortLabel="Sort By" Elevation="0">
-        <HeaderContent>
-            <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<WeatherForecast, object>(x=>x.Date)">Date</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<WeatherForecast, object>(x=>x.TemperatureC)">Temp. (C)</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<WeatherForecast, object>(x=>x.TemperatureF)">Temp. (F)</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<WeatherForecast, object>(x=>x.Summary!)">Summary</MudTableSortLabel></MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Date">@context.Date</MudTd>
-            <MudTd DataLabel="Temp. (C)">@context.TemperatureC</MudTd>
-            <MudTd DataLabel="Temp. (F)">@context.TemperatureF</MudTd>
-            <MudTd DataLabel="Summary">@context.Summary</MudTd>
-        </RowTemplate>
-        <PagerContent>
-            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
-        </PagerContent>
-    </MudTable>
+
+@code {
+	public double[] data = { 25, 77, 28, 5 };
+	public string[] labels = { "Oil", "Coal", "Gas", "Biomass" };
 }
 
 
 @code {
-    private WeatherForecast[]? forecasts;
+	private WeatherForecast[]? forecasts;
 
-    protected override async Task OnInitializedAsync()
-    {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-    }
+	protected override async Task OnInitializedAsync()
+	{
+		forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+	}
 }

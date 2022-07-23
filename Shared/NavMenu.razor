@@ -20,13 +20,13 @@
 				 Style="background-color: #0099A5;
 						height: 62px;
 						align-items: center;"
-				Icon="@Icons.Material.Filled.AvTimer">My Devices</MudNavLink>
+				Icon="@Icons.Material.Filled.AvTimer">Devices</MudNavLink>
 	@* My Views Button *@
 	<MudNavLink Href="fetchdata" Match="NavLinkMatch.Prefix"
 				 Style="background-color: #67B597;
 						height: 62px;
 						align-items: center;"
-				Icon="@Icons.Material.Filled.RemoveRedEye">My views</MudNavLink>
+				Icon="@Icons.Material.Filled.RemoveRedEye">Views</MudNavLink>
 
 
 </MudNavMenu>
@@ -45,12 +45,20 @@
 							height: 62px;
 							align-items: center;
 							margin-top:10px;
-							color: black">Insatech Map</MudNavLink>
+							color: black;
+							border-color:#2B3B43;
+							border-style: solid;
+							border-bottom-width: 3px;"
+							>Insatech Map</MudNavLink>
 			<MudNavLink Href="/security"
 					 Style="background-color: white;
 							height: 62px;
 							align-items: center;
-							color: black">Insatech Calculatede</MudNavLink>
+							color: black;
+							border-color:#2B3B43;
+							border-style: solid;
+							border-bottom-width: 3px;"
+							>Insatech Calculatede</MudNavLink>
 		</MudNavGroup>
 	</MudNavMenu>
 </MudPaper>
@@ -61,7 +69,7 @@
 	[Parameter] public bool toogleSideMenu { get; set; }
 	[Parameter] public EventCallback<bool> toogleSideMenuChanged { get; set; }
 
-	string myView = "Saved View";
+	string myView = "Saved Views";
 
 	bool _isExpanded = true;
 
@@ -73,7 +81,7 @@
 
 		if (stateOfDrawer == false)
 		{
-			myView = "Saved View";
+			myView = "Saved Views";
 		}
 		else
 		{
