@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\Fonts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessLibrary\DataAccessLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

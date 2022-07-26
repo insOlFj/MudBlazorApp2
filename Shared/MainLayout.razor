@@ -5,13 +5,16 @@
 <MudSnackbarProvider />
 
 
+
+
+
 <MudLayout>
 
 
 	@* Header *@
 	<MudAppBar Elevation="0" Class="p-0" DisableGutters
 			   Style="background-color: rgba(0, 150, 201, 0.5); padding-left:0px !important; padding-right:20px;">
-		
+
 		@* Logo *@
 		<MudPaper Style=" height:100%;">
 
@@ -40,23 +43,29 @@
 	</MudDrawer>
 
 	@* Right Sidepanel *@
-	<MudDrawer @bind-Open="_secondDrawerOpen" 
-				Style="background-color: rgba(188, 197, 204, 0.5);"
-				ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Elevation="0" Variant="@DrawerVariant.Persistent">
+	<MudDrawer @bind-Open="_secondDrawerOpen"
+			   Style="background-color: rgba(188, 197, 204, 0.5);"
+			   ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Elevation="0" Variant="@DrawerVariant.Persistent">
+
+
 	</MudDrawer>
 
 
-	<MudMainContent >
+	<MudMainContent>
+
+
 		@Body
+
 	</MudMainContent>
 
 </MudLayout>
+
 
 @*
 	FarveGuide
 
 	Lys Grå: HEX: #BCC5CC
-			 RGBA: rgba(188, 197, 204, 0.5);
+	RGBA: rgba(188, 197, 204, 0.5);
 	Mørk Grå: #2B3B43
 
 	Insatech Blue: #2EA3C8
@@ -69,6 +78,11 @@
 *@
 
 
+@code
+{
+
+}
+
 
 @code {
 
@@ -79,12 +93,21 @@
 		_drawerOpen = !_drawerOpen;
 	}
 
-	@*Open and close context menu*@
+	//bool _secondDrawerOpen = false;
 	bool _secondDrawerOpen = false;
+
+	//bool _secondDrawerOpen;
+
+
+
 	void SecondDrawerToggle()
 	{
 		_secondDrawerOpen = !_secondDrawerOpen;
 	}
+
+	@*Open and close context menu*@
+
+
 
 
 	MudTheme _themeEdits = new MudTheme()
@@ -97,7 +120,7 @@
 				DrawerIcon = Colors.Grey.Lighten5,
 				DrawerText = Colors.Grey.Lighten5,
 			}
-							,
+																,
 			Typography = new Typography()
 			{
 				H6 = new H6()

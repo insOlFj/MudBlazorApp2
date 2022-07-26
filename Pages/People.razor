@@ -1,0 +1,71 @@
+﻿@page "/People"
+
+@using DataAccessLibrary
+@using DataAccessLibrary.Models
+
+@inject IPeopleData _db
+
+<h3>Hello People Page</h3>
+<h4> Current People</h4>
+
+@*
+	@if (people is null)
+	{
+	<p><em>Loading...</em></p>
+	}
+	else
+	{
+	<table class="table table-striped">
+	<thead>
+	<tr>
+	<th>Name</th>
+	<th>Year</th>
+	<th>Number</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var person in people)
+	{
+	<tr>@person.Name</tr>
+	<tr>@person.Year</tr>
+	<tr>@person.Number</tr>
+	}
+
+	</tbody>
+
+	</table>
+	}
+
+*@
+
+
+<MudTable Items="@sleeple" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+	<HeaderContent>
+		<MudTh>Name</MudTh>
+		<MudTh>Year</MudTh>
+		<MudTh>Number</MudTh>
+
+	</HeaderContent>
+	<RowTemplate>
+
+		<MudTd DataLabel="Nr">@context.Name</MudTd>
+		<MudTd DataLabel="Sign">@context.Year</MudTd>
+		<MudTd DataLabel="Name">@context.Number</MudTd>
+
+	</RowTemplate>
+</MudTable>
+
+
+
+
+@code {
+
+	public List<PersonModel> sleeple;
+
+	protected override async Task OnInitializedAsync()
+	{
+		sleeple = await _db.GetPeople();
+	}
+
+}
+

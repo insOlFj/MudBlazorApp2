@@ -1,6 +1,15 @@
 ﻿@page "/devices"
 
+@using DataAccessLibrary
+@using DataAccessLibrary.Models
+
+@inject IPeopleData _db
+
+
+
 <PageTitle>Devices</PageTitle>
+
+
 
 <MudContainer Class="mt-0">
 	<MudGrid Class="mt-0">
@@ -30,7 +39,7 @@
 					<MudExpansionPanel Text="Panel Three" Style="border-bottom:solid;">
 						Panel Three Content
 					</MudExpansionPanel>
-					<MudExpansionPanel Text="Panel Four" >
+					<MudExpansionPanel Text="Panel Four">
 						Panel Four Content
 					</MudExpansionPanel>
 				</MudExpansionPanels>
@@ -40,7 +49,7 @@
 		</MudItem>
 
 		@* Shared with me *@
-		<MudItem xs="12" sm="5" md="5">
+		<MudItem xs="12" sm="5" md="4">
 			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; height: 500px;">
 				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
 					<CardHeaderContent>
@@ -55,9 +64,9 @@
 			</MudCard>
 		</MudItem>
 
-		@* Shared with me *@
-		<MudItem xs="12" sm="5" md="2">
-			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; height: 500px;">
+		@* Contacts *@
+		<MudItem xs="12" sm="5" md="3">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; border-bottom-width: 0px;">
 				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
 					<CardHeaderContent>
 
@@ -67,6 +76,27 @@
 					</CardHeaderContent>
 
 				</MudCardHeader>
+
+				<MudExpansionPanels Elevation="0" Class="rounded-0">
+
+					@if (people == null)
+					{
+						<p><em>Loading...</em></p>
+					}
+					else
+					{
+						@foreach (var person in people)
+						{
+							<MudExpansionPanel onclick="@(() => SecondDrawerToggle())" Text="@person.Name" Style="border-bottom:solid;">
+								<P>Year: @person.Year</P>
+								<p>Number: @person.Number</p>
+							</MudExpansionPanel>
+
+						}
+					}
+
+
+				</MudExpansionPanels>
 
 			</MudCard>
 		</MudItem>
@@ -82,3 +112,29 @@
 		currentCount++;
 	}
 }
+
+
+
+
+
+@code {
+
+
+	bool _isItExpanded = false;
+
+	void SecondDrawerToggle()
+	{
+
+	}
+
+	public List<PersonModel> people;
+
+	protected override async Task OnInitializedAsync()
+	{
+		people = await _db.GetPeople();
+
+
+	}
+
+}
+
