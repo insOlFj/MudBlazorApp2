@@ -10,7 +10,6 @@
 <PageTitle>Devices</PageTitle>
 
 
-
 <MudContainer Class="mt-0">
 	<MudGrid Class="mt-0">
 
@@ -30,16 +29,16 @@
 
 				@* Skal fyldes med indhold fra DB *@
 				<MudExpansionPanels Elevation="0" Class="rounded-0">
-					<MudExpansionPanel Text="Panel One" Style="border-bottom:solid;">
+					<MudExpansionPanel onclick="@ClickHandler" Text="Panel One" Style="border-bottom:solid;">
 						Panel One Content
 					</MudExpansionPanel>
-					<MudExpansionPanel Text="Panel Two" Style="border-bottom:solid;">
+					<MudExpansionPanel onclick="@ClickHandler" Text="Panel Two" Style="border-bottom:solid;">
 						Panel Two Content
 					</MudExpansionPanel>
-					<MudExpansionPanel Text="Panel Three" Style="border-bottom:solid;">
+					<MudExpansionPanel onclick="@ClickHandler" Text="Panel Three" Style="border-bottom:solid;">
 						Panel Three Content
 					</MudExpansionPanel>
-					<MudExpansionPanel Text="Panel Four">
+					<MudExpansionPanel onclick="@ClickHandler" Text="Panel Four">
 						Panel Four Content
 					</MudExpansionPanel>
 				</MudExpansionPanels>
@@ -87,7 +86,8 @@
 					{
 						@foreach (var person in people)
 						{
-							<MudExpansionPanel onclick="@(() => SecondDrawerToggle())" Text="@person.Name" Style="border-bottom:solid;">
+							
+							<MudExpansionPanel onclick="@ClickHandler" Text="@person.Name" Style="border-bottom:solid;">
 								<P>Year: @person.Year</P>
 								<p>Number: @person.Number</p>
 							</MudExpansionPanel>
@@ -104,13 +104,10 @@
 	</MudGrid>
 </MudContainer>
 
-@code {
-	private int currentCount = 0;
 
-	private void IncrementCount()
-	{
-		currentCount++;
-	}
+
+@code {
+
 }
 
 
@@ -134,6 +131,15 @@
 		people = await _db.GetPeople();
 
 
+	}
+
+	string persondata = "";
+
+	[CascadingParameter]
+	public MainLayout mainLayoutObj { get; set; }
+	private async Task ClickHandler()
+	{
+		await mainLayoutObj.DrawerClickHandler();
 	}
 
 }
