@@ -35,17 +35,22 @@
 
 <MudPaper Width="240px" Style="align-items: center;" Elevation="0">
 	<MudNavMenu>
-		<MudNavGroup Title=@SavedViewString
+		<MudNavGroup 
+		
+						
+					Title=@SavedViewString
 					 Style="background-color: #949E95;
 							height: 62px;
 							padding-top:10px;
 							color: white;"
 					 Icon="@Icons.Material.Filled.List"
-					 @bind-Expanded=_isExpanded>
+					 @bind-Expanded=_isExpanded
+					HideExpandIcon>
 			<MudNavLink Href="/users"
 					 Style="background-color: white;
 							height: 62px;
 							align-items: center;
+							text-align: center;
 							margin-top:10px;
 							color: black;
 							border-color:#2B3B43;
@@ -56,6 +61,7 @@
 					 Style="background-color: white;
 							height: 62px;
 							align-items: center;
+							text-align: right;
 							color: black;
 							border-color:#2B3B43;
 							border-style: solid;
@@ -89,7 +95,6 @@
 		}
 		else
 		{
-			_isExpanded = false;
 			SavedViewString = "";
 		}
 

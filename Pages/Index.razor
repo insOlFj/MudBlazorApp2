@@ -2,39 +2,46 @@
 
 <PageTitle>Index</PageTitle>
 
-<MudContainer Class="mt-0">
 	<MudGrid Class="mt-0">
 
 		@* Welcome message *@
 		<MudItem xs="12" sm="6" md="6">
-			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; height: 500px;">
-				<MudCardHeader Style="padding:5px; padding-left:10px; padding-right:10px; border-bottom:solid; border-bottom-width: 3px; ">
+			<MudCard Elevation="0" Square="true" Style="border:solid;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; padding-right:10px; border-bottom:solid; border-bottom-width: 3px;  ">
 
 					<CardHeaderContent>
 
-
-
-						<MudText Typo="Typo.h6" Align="Align.Left">Welcome to InsaConnect</MudText>
-						
+						<MudText  Typo="Typo.h6" Align="Align.Left">Welcome to InsaConnect</MudText>
 
 					</CardHeaderContent>
 
-
-
-
 				</MudCardHeader>
+
+				@* Welcome image *@
+				<MudContainer Class="pa-0" Style="border-bottom:solid; border-bottom-width: 3px;">
+
+					<MudCardMedia Image="images/Insatech-2.jpg" />
+
+				</MudContainer>
+
+				@* Said message *@
+				<MudContainer Class="pa-4">
+			
+					<MudBlazorApp2.Pages.Content.WelcomeMessage />
+
+				</MudContainer>
+
 
 			</MudCard>
 		</MudItem>
 
 		@* News and updates *@
 		<MudItem xs="12" sm="6" md="4">
-			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; height: 500px;">
-				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+			<MudCard Elevation="0" Square="true" Style="border:solid; height: 500px;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px; background-color: rgba(0, 150, 201, 0.2);">
 					<CardHeaderContent>
 
 						<MudText Typo="Typo.h6" Align="Align.Left">News</MudText>
-
 
 					</CardHeaderContent>
 
@@ -43,104 +50,14 @@
 			</MudCard>
 		</MudItem>
 
-
 	</MudGrid>
-</MudContainer>
 
-@*
-	<MudGrid Class="mt-4">
-	<MudItem xs="12" sm="6" md="4">
-	<MudCard Elevation="0" Class="rounded-0" Style="border:solid;">
-	<MudCardHeader>
-	<CardHeaderContent>
-	<MudText Typo="Typo.h5" Align="Align.Center">Beginner</MudText>
-	</CardHeaderContent>
-	</MudCardHeader>
-	<MudCardContent>
-	<div class="d-flex justify-center">
-	<MudText Typo="Typo.h3">$5</MudText>
-	<MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
-	</div>
-	<MudList Class="mx-auto mt-4" Style="width:300px;">
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	Unlimited something
-	</MudListItem>
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	10 something
-	</MudListItem>
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	No something
-	</MudListItem>
-	</MudList>
-	</MudCardContent>
-	<MudCardActions Class="d-flex justify-center">
-	<MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
-	</MudCardActions>
-	</MudCard>
-	</MudItem>
-	<MudItem xs="12" sm="6" md="4">
-	<MudCard Elevation="25" Class="rounded-lg pb-4">
-	<MudCardHeader>
-	<CardHeaderContent>
-	<MudText Typo="Typo.h5" Align="Align.Center">Starter</MudText>
-	</CardHeaderContent>
-	</MudCardHeader>
-	<MudCardContent>
-	<div class="d-flex justify-center">
-	<MudText Typo="Typo.h3">$10</MudText>
-	<MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
-	</div>
-	<MudList Class="mx-auto mt-4" Style="width:300px;">
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	Unlimited something
-	</MudListItem>
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	10 something
-	</MudListItem>
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	No something
-	</MudListItem>
-	</MudList>
-	</MudCardContent>
-	<MudCardActions Class="d-flex justify-center">
-	<MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
-	</MudCardActions>
-	</MudCard>
-	</MudItem>
-	<MudItem xs="12" sm="12" md="2">
-	<MudCard Elevation="25" Class="rounded-lg pb-4">
-	<MudCardHeader>
-	<CardHeaderContent>
-	<MudText Typo="Typo.h5" Align="Align.Center">Professional</MudText>
-	</CardHeaderContent>
-	</MudCardHeader>
-	<MudCardContent>
-	<div class="d-flex justify-center">
-	<MudText Typo="Typo.h3">$15</MudText>
-	<MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
-	</div>
-	<MudList Class="mx-auto mt-4" Style="width:300px;">
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	Unlimited something
-	</MudListItem>
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	10 something
-	</MudListItem>
-	<MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-	No something
-	</MudListItem>
-	</MudList>
-	</MudCardContent>
-	<MudCardActions Class="d-flex justify-center">
-	<MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start Now</MudButton>
-	</MudCardActions>
-	</MudCard>
-	</MudItem>
-	</MudGrid>
-*@
 
 
 @code {
+
+
+
 	void SecondDrawerToggle()
 	{
 

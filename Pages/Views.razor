@@ -3,7 +3,7 @@
 @inject WeatherForecastService ForecastService
 
 <PageTitle>Views</PageTitle>
-<MudContainer Class="mt-0">
+
 	<MudGrid Class="mt-0">
 
 		@* Graph *@
@@ -43,7 +43,7 @@
 
 				<MudContainer Class="d-flex align-content-center justify-center flex-wrap">
 
-					<MudChart ChartType="ChartType.Donut" InputData="@data" Width="100%" Height="300px" InputLabels="@labels" Class="d-flex justify-center">
+					<MudChart ChartType="ChartType.Donut" InputData="@data" Width="100%" Height="350px" InputLabels="@labels" Class="d-flex justify-center">
 						<CustomGraphics>
 							<text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
 							<text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@data.Sum().ToString()</text>
@@ -56,9 +56,58 @@
 			</MudCard>
 		</MudItem>
 
+				@* Donut *@
+		<MudItem xs="12" sm="6" md="6">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid; ">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">Donut</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+				<MudContainer Class="d-flex align-content-center justify-center flex-wrap">
+
+					<MudChart ChartType="ChartType.Donut" InputData="@data" Width="100%" Height="350px" InputLabels="@labels" Class="d-flex justify-center">
+						<CustomGraphics>
+							<text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Total</text>
+							<text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@data.Sum().ToString()</text>
+						</CustomGraphics>
+					</MudChart>
+
+				</MudContainer>
+
+
+			</MudCard>
+		</MudItem>
+
+				@* Graph *@
+		<MudItem xs="12" sm="6" md="6">
+			<MudCard Elevation="0" Class="rounded-0" Style="border:solid;">
+				<MudCardHeader Style="padding:5px; padding-left:10px; border-bottom:solid; border-bottom-width: 3px;">
+					<CardHeaderContent>
+
+						<MudText Typo="Typo.h6" Align="Align.Left">Graph</MudText>
+
+
+					</CardHeaderContent>
+
+				</MudCardHeader>
+
+				<MudContainer Style=" padding:12px;">
+					<MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px"></MudChart>
+					<MudButton @onclick="RandomizeData">Randomize Data</MudButton>
+					<MudText Typo="Typo.h6">Selected portion of the chart: @Index</MudText>
+				</MudContainer>
+
+			</MudCard>
+		</MudItem>
 
 	</MudGrid>
-</MudContainer>
+
 
 
 

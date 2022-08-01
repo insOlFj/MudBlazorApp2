@@ -5,88 +5,87 @@
 <MudSnackbarProvider />
 
 
+<MudLayout>
 
 
-<CascadingValue Value="@this">
+	@* Header *@
+	<MudAppBar Elevation="3" Class="p-0" DisableGutters
+			   Style="background-color: rgba(0, 150, 201, 0.5); padding-left:0px !important; padding-right:20px;">
 
-	<MudLayout>
+		@* Logo *@
+		<MudPaper Style=" height:100%;">
 
+			<MudContainer Style="width:240px; height:100%; background-color:#2EA3C8; padding:0px;"
+						  Class="d-flex align-content-center justify-center flex-wrap">
 
-		@* Header *@
-		<MudAppBar Elevation="0" Class="p-0" DisableGutters
-				   Style="background-color: rgba(0, 150, 201, 0.5); padding-left:0px !important; padding-right:20px;">
+				@* Logo image *@
+				<MudImage Src="images/InsaConnect, White Slim.png" Alt="InsaConnect" Elevation="0" Style="height:40px; width:100px;"></MudImage>
 
-			@* Logo *@
-			<MudPaper Style=" height:100%;">
+			</MudContainer>
 
-				<MudContainer Style="width:240px; height:100%; background-color:#2EA3C8; padding:0px;"
-							  Class="d-flex align-content-center justify-center flex-wrap">
+		</MudPaper>
 
-					@* Logo image *@
-					<MudImage Src="images/InsaConnect, White Slim.png" Alt="InsaConnect" Elevation="0" Style="height:40px; width:100px;"></MudImage>
+		<MudSpacer />
+		@* Context menu button *@
+		<MudIconButton OnClick="@(() => SecondDrawerToggle())" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+	</MudAppBar>
 
-				</MudContainer>
+	@* Left Sidepanel *@
+	<MudDrawer  @bind-Open="_drawerOpen"
+			   Style="background-color: rgba(188, 197, 204, 0.5);"
+			   ClipMode="DrawerClipMode.Always" Elevation="0" Variant="@DrawerVariant.Mini">
 
-			</MudPaper>
+		<NavMenu toogleSideMenu="_drawerOpen" toogleSideMenuChanged="DrawerToggle"> </NavMenu>
 
-			<MudSpacer />
-			@* Context menu button *@
-			<MudIconButton OnClick="@(() => SecondDrawerToggle())" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-		</MudAppBar>
+	</MudDrawer>
 
-		@* Left Sidepanel *@
-		<MudDrawer @bind-Open="_drawerOpen"
-				   Style="background-color: rgba(188, 197, 204, 0.5);"
-				   ClipMode="DrawerClipMode.Always" Elevation="0" Variant="@DrawerVariant.Mini">
+	@* Right Sidepanel *@
+	<MudDrawer @ref="rightPanelDrawer" @bind-Open="_secondDrawerOpen"
+			   Style="background-color: rgba(188, 197, 204, 0.5);"
+			   ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Elevation="0" Variant="@DrawerVariant.Persistent">
 
-			<NavMenu toogleSideMenu="_drawerOpen" toogleSideMenuChanged="DrawerToggle"> </NavMenu>
+		<MudCard Elevation="0" Class="rounded-0" Style="height:200px; padding:12px; background-color:transparent; border-bottom-width:3px; border-color:black;">
 
-		</MudDrawer>
+			<h4> Name</h4> <br />
+			<p> value1:</p> <br />
+			<p> value2:</p> <br />
+			<p> value3:</p>
 
-		@* Right Sidepanel *@
-		<MudDrawer @bind-Open="_secondDrawerOpen"
-				   Style="background-color: rgba(188, 197, 204, 0.5);"
-				   ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Elevation="0" Variant="@DrawerVariant.Persistent">
+		</MudCard>
+		<MudCard Elevation="0" Class="rounded-0" Style="height:200px; padding:12px; background-color:transparent;">
 
-			<MudCard Elevation="0" Class="rounded-0" Style="height:200px; padding:12px; background-color:transparent; border-bottom-width:3px; border-color:black;">
+			<h4> Other Category</h4> <br />
+			<p> value1:</p> <br />
+			<p> value2:</p> <br />
+			<p> value3:</p>
 
-				<h4> Name</h4> <br />
-				<p> value1:</p> <br />
-				<p> value2:</p> <br />
-				<p> value3:</p> 
+		</MudCard>
+	</MudDrawer>
 
-			</MudCard>
-			<MudCard Elevation="0" Class="rounded-0" Style="height:200px; padding:12px; background-color:transparent;">
-
-				<h4> Other Category</h4> <br />
-				<p> value1:</p> <br />
-				<p> value2:</p> <br />
-				<p> value3:</p> 
-
-			</MudCard>
-		</MudDrawer>
-
+	<CascadingValue Value="@this">
 
 		<MudMainContent>
-
-
+			<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="py-2">
 			@Body
-
+			</MudContainer>
 		</MudMainContent>
 
-	</MudLayout>
+	</CascadingValue>
+</MudLayout>
 
-</CascadingValue>
+
 
 
 @*
 	FarveGuide
 
 	Lys Grå: HEX: #BCC5CC
-	RGBA: rgba(188, 197, 204, 0.5);
+			 RGBA: rgba(188, 197, 204, 0.5);
 	Mørk Grå: #2B3B43
 
 	Insatech Blue: #2EA3C8
+	Opacity: rgba(0, 150, 201, 0.5);
+
 
 	Insatech Purple: #6773AD
 	Insatech Petrol: #0099A5
@@ -98,11 +97,13 @@
 
 @code {
 
+	MudDrawer rightPanelDrawer;
+
 	@*Open and close navigation menu*@
 	bool _drawerOpen = true;
 	void DrawerToggle()
 	{
-		_drawerOpen = !_drawerOpen;
+		_drawerOpen = !_drawerOpen;		
 	}
 
 
@@ -134,7 +135,7 @@
 				DrawerIcon = Colors.Grey.Lighten5,
 				DrawerText = Colors.Grey.Lighten5,
 			}
-					,
+						,
 			Typography = new Typography()
 			{
 				H6 = new H6()
